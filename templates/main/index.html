@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% block content %}
+
+    <div class="btn-group" style="margin-top: 5px">
+      <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Kategoriyalar
+      </button>
+      <div class="dropdown-menu">
+          {% for g in category %}
+            <a href="{% url 'main:index' g.id %}" class="dropdown-item">{{ g.name }}</a>
+          {% endfor %}
+      </div>
+    </div>
+    <div>
+        {% for chn in channel %}
+            <ul>
+                <li><img src="{{ chn.Channel_image.url }}" class="logo"> {{ chn.Channel_name }}</li>
+                {% for prg in program %}
+                    {% if prg.Program_name == chn.Channel_name %}
+                        {{ prg.Program_name }}
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endfor %}
+        {% for prg in program %}
+           {{ prg.Program_name }}
+        {% endfor %}
+    </div>
+
+{% endblock %}
+{#{{ chn.Channel_name }} <img src="{{ chn.Channel_image.url }}"/>#}
+{#<img src="..." alt="..." class="rounded-circle">#}
+{#    <div class="btn-group-vertical" style="margin-top: 5px">#}
+{#         {% for g in category %}#}
+{#            <a href="{% url 'main:index' g.id %}" class="btn btn-outline-info m-sm-auto{% if g.id == request.resolver_match.kwargs.gid %}active{% endif %}">{{ g.name }}</a>#}
+{#         {% endfor %}#}
+{#    </div>#}
