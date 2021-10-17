@@ -4,27 +4,25 @@
 
     <div class="btn-group" style="margin-top: 5px">
       <button type="button" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Kategoriyalar
+        {% trans 'Kategoriyalar' %}
       </button>
       <div class="dropdown-menu">
           {% for g in category %}
-            <a href="{% url 'main:index' g.id %}" class="dropdown-item">{{ g.name }}</a>
+            <a href="{% url 'main:index' g.id %}" class="dropdown-item">{{ g.category }}</a>
           {% endfor %}
       </div>
     </div>
+
     <div>
         {% for chn in channel %}
-            <ul>
-                <li><img src="{{ chn.Channel_image.url }}" class="logo"> {{ chn.Channel_name }}</li>
-                {% for prg in program %}
-                    {% if prg.Program_name == chn.Channel_name %}
-                        {{ prg.Program_name }}
-                    {% endif %}
-                {% endfor %}
-            </ul>
+           <div class="row">
+            <a><img src="{{ chn.Channel_image.url }}" style="width: 100px; height: 50px" class="logo"> {{ chn.Channel_name }}</a>
+           </div>
         {% endfor %}
+    </div>
+    <div>
         {% for prg in program %}
-           {{ prg.Program_name }}
+            {{ prg.Program_time }} - {{ prg.Program_name }}
         {% endfor %}
     </div>
 

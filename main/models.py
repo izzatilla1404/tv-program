@@ -1,13 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.base import Model
+from django.utils.translation import get_language
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50)
+    category_uz = models.CharField(max_length=50)
+    category_ru = models.CharField(max_length=50)
 
     def __str__(self):
-        return self.name
+        return self.category_uz
+
+    @property
+    def category(self):
+        return getattr(self, 'category_{}'.format(get_language()))
 
 
 class Channel(models.Model):

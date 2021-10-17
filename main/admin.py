@@ -6,7 +6,8 @@ from .models import Category, Channel, Program
 class CategoryAdmin(admin.ModelAdmin):
     list_display = [
         'id',
-        'name'
+        'category_uz',
+        'category_ru'
     ]
 
     class Meta:

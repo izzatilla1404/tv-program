@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import MainIndex, ChannelView, CategoryView, ProgramView
+from .views import MainIndex, CategoryView
 
 app_name = 'main'
 urlpatterns = [

@@ -17,14 +17,28 @@
         <nav class="navbar navbar-dark bg-dark">
             <div class="container">
                 <a class="navbar-brand" href="{% url 'main:index' %}">TVDASTUR</a>
-                <form method="get" action="{{ request.path }}" class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="text" name="p" value="{{ request.GET.p }}" placeholder="Kanal nomi kiriting" aria-label="Kanal nomi kiting">
+                <form method="get" action="{{ request.path }}" class="form-inline">
+                    <input class="form-control mr-sm-2" type="text" name="p" value="{{ request.GET.p }}" placeholder="{% trans 'Kanal nomi kiriting' %}" aria-label="{% trans 'Kanal nomi kiriting' %}">
                     <button class="btn btn-outline-info my-2 my-sm-0" type="submit">{% trans "Qidirish" %}</button>
                 </form>
                 <a href="admin/" class="btn btn-outline-info">{% trans "Admin" %}</a>
+                <li class="nav-item dropdown ml-3">
+                    <a class="active lang-link" id="navbarDropdown" role="button" data-toggle="dropdown">
+                        {% for language in LANGUAGES %}
+                            {% if  language.0 == LANGUAGE_CODE %}
+                                {{ language.1 }}
+                            {% endif %}
+                        {% endfor %}
+                    </a>
+                    <div class="dropdown-menu">
+                        {% for language in LANGUAGES %}
+                            <a class="dropdown-item" href="/{{ language.0 }}{{ request.get_full_path|slice:"3:" }}">{{ language.1 }}</a>
+                        {% endfor %}
+                    </div>
+                </li>
             </div>
         </nav>
-        {{ LANGUAGES }} // {{ LANGUAGE_CODE }}
+{#        {{ LANGUAGES }} // {{ LANGUAGE_CODE }}#}
             {% block content %}{% endblock %}
     </div>
 
